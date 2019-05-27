@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+    <button>按钮一</button>
+<!-- 	<script src="05.js"></script>-->
+   <script>
+     var   w = new Worker("05.js");
+	   w.postMessage("123");
+	   w.onmessage = function(){
+	     console.log("ui接收数据"+e.data)
+	   }
+   </script>
+	 	<button>按钮二</button>
+ </body>
+</html>
+var t = setIntarval(function(){
+
+},100)
+clearIntarval(t);

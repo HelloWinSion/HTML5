@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>结果页面</title>
+ </head>
+ <body>
+    <h1>测试结果</h1>
+    <p>单词:<span id="all"></span></p>
+    <p>完成了:<span id="finish"></span></p>
+    <p>未完成的:<span id="notF"></span></p>
+    <p>正确:<span id="right"></span></p>
+    <p>错误了:<span id="wrong"></span></p>
+    <input type="button" value="重新测试" id="rtest">
+   
+    <script type="text/javascript">
+	    //获取要操作的dom元素
+		var allElem = document.getElementById("all");
+		var finishElem = document.getElementById("finish");
+		var notFElem = document.getElementById("notF");
+		var rightElem = document.getElementById("right");
+		var wrongElem = document.getElementById("wrong");
+	    var resultDataStr = sessionStorage["resultData"];
+	    //判断是否已经有测试结果
+		if(resultDataStr){
+			console.log("有测试结果");
+			//有
+		    var resultData = JSON.parse(resultDataStr);
+			//修改界面对应的文本内容
+			allElem.innerHTML = resultData.allNum;
+			finishElem.innerHTML = resultData.finishNum;
+			notFElem.innerHTML = resultData.notFNum;
+			rightElem.innerHTML = resultData.rightNum;
+			wrongElem.innerHTML = resultData.wrongNum;
+		}else{
+			console.log("重新计算测试结果");
+			//没有
+			//获取答案列表json字符串
+			var subAnswer = localStorage.getItem("subAnswer");
+			//判断是否有提交答案 没有返回测试页面
+			if(!subAnswer){
+			  alert("答案信息有误，请重新测试");
+			  location.href = "./ws01_test.html";
+			}
+			//答案json字符串 转为 对象
+			var subAnswerObj = JSON.parse(subAnswer);
+
+			//单词列表
+			var substr = localStorage.getItem("list");
+			var subObj = JSON.parse(substr);
+
+			//总数
+			var allNum = Object.keys(subObj).length;
+			//完成了
+			var finishNum = Object.keys(subAnswerObj).length;
+			//未完成的
+			var notFNum = allNum - Object.keys(subAnswerObj).length;
+
+			//正确的数量
+			var rightNum = 0;
+			var wrongNum = 0;
+			for(let i in subAnswerObj){
+			  //正确的单词(rKey)和中文(rValue)
+			  var rKey = Object.keys(subObj)[i];
+			  var rValue = subObj[rKey];
+
+			  //提交的答案
+			  var subVal = subAnswerObj[i];
+			  if(subVal == rValue){
+				rightNum++;
+			  }else{
+				wrongNum++;
+			  }
+			}
+
+			//修改界面对应的文本内容
+			allElem.innerHTML = allNum;
+			finishElem.innerHTML = finishNum;
+			notFElem.innerHTML = notFNum;
+			rightElem.innerHTML = rightNum;
+			wrongElem.innerHTML = wrongNum;
+
+			//sessionStorage 会话存储 答案结果
+			var resultObj = {};
+			resultObj["allNum"] = allNum;
+			resultObj["finishNum"] = finishNum;
+			resultObj["notFNum"] = notFNum;
+			resultObj["rightNum"] = rightNum;
+			resultObj["wrongNum"] = wrongNum;
+			var resultStr = JSON.stringify(resultObj);
+			sessionStorage["resultData"] = resultStr;
+		}
+		
+        //重新测试点击事件
+        var rtestElem = document.getElementById('rtest');
+        rtestElem.onclick = function(){
+            // 清除答案 跳转到测试页面
+            localStorage.removeItem("subAnswer");
+            location.href = "./ws01_test.html";
+        }
+  	</script>
+ </body>
+</html>

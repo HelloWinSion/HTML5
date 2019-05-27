@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>测试页面</title>
+ </head>
+ <body>
+    <h1>小伙子，接受挑战吧！</h1>
+    <div class="list">
+    </div>
+    <input type="button" value="提交答案" id="sub">
+   
+    <script type="text/javascript">
+	    /**1.获取单词列表对象,循环列表对象,向页面追加单词和答题input**/
+	    //获取单词列表 json字符串
+        var substr = localStorage.getItem("list");
+		if(!substr){
+		  alert("暂无单词列表，请返回添加");
+		  location.href = "./ws01_save.html";
+		}
+		//解析json字符串成对象或数组
+        var subObj = JSON.parse(substr);
+        //打印单词列表subObj 
+		//看具体数据结构 以及解析后是数组还是对象
+		console.log(subObj);
+		//设置html的容器
+        var html = "";
+		//遍历单词列表对象
+        for(let i in subObj){
+			//打印 i （键）
+            console.log(i);
+			//打印对象对应角标的值 (值)
+            console.log(subObj[i]);
+
+			//每个单词：input输入框
+			//html容器  循环连接字符串 "单词英文:<input type="text" class="opt">
+            html += `<div>
+                    ${i}:<input type="text" class="opt">
+                </div>`;
+        }
+        //获取 单词列表 的 父类元素对象
+        var listElem = document.querySelector(".list");
+		//追加到页面
+        listElem.innerHTML = html;
+
+        /**2.点击提交答案按钮**/
+        /*点击提交答案操作
+		 * 1.获取回答答案的input中文释义输入框
+		 * 2.创建一个答案列表对象  可以转成json字符串 本地存储答案列表
+		 * 3.创建一个未完成的 变量 计数
+		 * 4.循环回答答案input对象列表   目的得到每个input 的 值 
+		       a.input对象结构为 
+		           0-lenght 的键 
+		       b.用for  
+	     * 5.向答案对象中添加已经回答的值 注意对应的key
+		     单词列表  {"red":"红色","pink":"粉色","blue":"蓝色"}
+			 那么  0:第一个单词  1:第二个单词  2:第三个单词
+			 答案列表 
+			 如果回答第一 
+			 即 从0开始 到单词长度  的角标  设为答案对象的角标  
+			 这样 单词列表  和答案列表  对应的单词就能对应上 
+			 {"0":"答案"}
+             如果回答三个单词 
+			 即 {"2":"答案"}
+			 如果回答第一和三个单词 
+			 即 {"0":"答案","2":"答案"}
+		 *  6.把答案对象  转成  json字符串 
+		 *  7.本地存储
+		 *  8.跳转到结果页面
+		 */
+        sub.onclick = function(){
+			//获取所有的答题input框
+            var opts = document.querySelectorAll(".opt");
+			console.log(opts);
+			//设置未完成 计数变量
+            var notValNum = 0;
+			//提交答案的 列表对象
+            var subAnswerObj = {};
+            
+			/*//使用for  of  做法
+			//key 用来生成答案对象的角标
+            var key = 0;
+			for(var i of opts){
+			   //i为每个input元素 得到每个答题input的值
+			   var optVal = i.value;
+			   if(!optVal){
+                    notValNum++
+                }else{
+                    subAnswerObj[key] =optVal;
+					key++;
+                } 
+			   
+			}*/
+
+            //for做法
+            for(var i=0;i<opts.length;i++){
+				//opts[i]为当前答题input元素对象  
+				//elem.value 获取值
+                var optVal = opts[i].value;
+                if(!optVal){
+                    notValNum++
+                }else{
+					//把值存入到对象  角标从0开始
+					//第一个单词为0  第三个单词为2
+                    subAnswerObj[i] =optVal;
+                } 
+            }
+
+			//判断未完成的个数  是否等于  单词列表的长度
+            if(notValNum == Object.keys(subObj).length ){
+				//长度相等  说明  都没有输入  input答案值
+                alert('不能都不会做吧？');return;
+            }
+			
+			//把答案对象 转成  json字符串
+            var subAnswerStr = JSON.stringify(subAnswerObj);
+			//本地存储 答案字符串  key为subAnswer  value为json字符串
+            localStorage.setItem("subAnswer",subAnswerStr);
+
+			//删除之前提交答案的结果
+			sessionStorage.removeItem("resultData");
+
+			//跳转到结果页面
+            location.href = "./ws01_result.html";
+        }
+	</script>
+   </p>
+ </body>
+</html>

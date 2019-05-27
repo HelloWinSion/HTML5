@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        li{
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <ul id="menu">
+
+    </ul>
+    <button id="btn" >提交试卷</button>
+    <script>
+        var html = "";
+        for(var i=0;i<localStorage.length;i++){
+            var key = localStorage.key(i);
+            html += `<li><span>${key}</span><input/></li>`;
+        }
+        var menu = document.getElementById("menu");
+        menu.innerHTML = html;
+        //判断试卷并给出结果
+        var btn = document.getElementById("btn");
+        //为btn绑定单机事件
+        btn.onclick = function(){
+          
+        }
+    </script>
+</body>
+</html>-

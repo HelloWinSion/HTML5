@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h3>获取数据</h3>
+    <script>
+        var uname = sessionStorage.getItem("uname");
+        var car = sessionStorage.getItem("car");
+        //console.log(uname);
+        //console.log(car);
+        var key = sessionStorage.key(0);
+        console.log("下标为0：key"+key);
+        var size = sessionStorage.length;
+        console.log("保存几组数据"+size);
+        sessionStorage.removeItem("car")
+        size = sessionStorage.length;
+       console.log("删除后还剩余几组数据"+size);
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+//获取画布
+var c3=document.getElementById('c3');
+//获取画笔
+var ctx = c3.getContext('2d');
+//获取画布的宽高
+var cX = c3.width;
+var cY = c3.height;
+//设置线宽
+ctx.lineWidth = 5
+//实心
+ctx.fillRect(200,160,100,80);
+//设置实心的样式
+ctx.fillStyle="#f00";
+//空心 
+ctx.strokeStyle="#000";//空心或描边的样式
+ctx.strokeRect(400,0,100,80);//右上角
+//清除左上角矩形
+ctx.clearRect(0,0,100,80);
+ctx.clearRect(200,160,100,80);
+//清除整个画布
+ctx.clearRect(0,0,画布的宽,画布的高);
+ctx.textBaseline="top";
+//设置文本大小
+ctx.font="19px SimHei";
+//获取文本宽度
+var txtWidthObj=ctx.measureText(txt).width;
+//填充文本
+ctx.fillText(txt,250,200);
+ctx.beginPath()  开始一条新路径
+ctx.closePath()  闭合一条路径
+ctx.moveTo(x,y)  移动到一个指定点
+ctx.lineTo(x,y)  从当前点到指定点绘直线
+ctx.arc(cx,cy,r,start,end) 绘制圆拱形
+   cx,cy  圆心
+   r      半径
+   start  起始弧度
+   end    终止弧度(不能使用角度)
+   弧度=?(角度)*Math.PI/180 
+//描边
+ctx.stroke() 
+//填充
+ctx.fill()    
+图片操作
+创建图片对象
+var imgObj = new Image();
+下载图片对象
+imgObj.src = "图片路径";
+绑定事件 --- 下载完成
+imgObj.onload()=function(){
+    //图片的宽高
+    var imgW = imgObj.width;
+    var imgH = imgObj.height;
+    //绘制图片
+    //imgObj:图片对象 x:图片对象左上角原点的x坐标
+    //y:图片对象左上角原点的y坐标 
+    //w:图片的宽度设置  h:图片的高度设置
+    ctx.drawImage(imgObj,x,y,w,h);
+}
+定时器
+var c=setInterval(function(){
+   //清除定时器
+   clearInterval(t);
+},1000)
+
+

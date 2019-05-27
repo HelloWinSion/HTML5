@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    用户输入:<input type="text" id="inp">
+    <input type="submit" value="提交" id="sub">
+    <div id="txt">
+     计算结果为...
+    </div>
+    <script>
+        //获取dom元素
+        var inp = document.getElementById("inp");
+        var sub = document.getElementById("sub");
+        var txt = document.getElementById("txt");
+        //点击提交按钮获取用户输入的值
+        sub.onclick = function(){
+           //获取值
+           var n = inp.value;
+           //发送数据
+           var   w = new Worker("06.js");
+                 w.postMessage(n);
+                 w.onmessage = function(e){
+                    console.log("ui接收数据"+e.data);
+                    var sum = e.data;
+                    txt.innerHTML = "计算结果为"+sum;
+                   }
+               }
+    </script>
+</body>
+</html>

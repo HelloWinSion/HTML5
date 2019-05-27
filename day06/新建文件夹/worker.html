@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    输入内容：<input type="text" id="inp">
+    <input type="button" id="btn" value="提交">
+    <div id="txt">
+       
+    </div>
+    <script>
+     //获取dom元素
+     var inp = document.getElementById("inp");
+     var btn = document.getElementById("btn");
+     var txt = document.getElementById("txt");
+     //为btn按钮绑定事件
+     btn.onclick = function(){
+       var  n = inp.value;
+       var w = new Worker("worker_ui.js");
+       w.postMessage(n);    
+       //接收计算结果
+       w.onmessage = function(e){
+           //获得计算结果
+           var sum = e.data;
+           //拼凑显示计算结果的文本
+           var text = "计算结果为："+sum;
+           console.log(text);
+           //修改对应元素的文本内容  id为txt的元素
+           txt.innerHTML = text;
+       }
+     }
+    </script>
+</body>
+</html>

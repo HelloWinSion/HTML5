@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .container{
+            width:200px;
+            height:200px;
+            text-align: center;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>录入新单词</h3>
+        <form action="">
+            英文:<input type="text" id="eng" ><br>
+            中文:<input type="text" id="ehi" ><br>
+            <input type="button" value="保存" id="btn">
+        </form>
+        <hr>
+        <a href="">添加</a>
+        <a href="">测试</a>
+    </div>
+    <script>
+        //1.获取所有的按钮
+        var eng = document.getElementById("eng");
+        var ehi = document.getElementById("ehi");
+        var btn = document.getElementById("btn");
+        //2.为按钮btn绑定单击事件
+        btn.onclick = function(){
+          //3.获取用户输入中文，英文
+          var e = eng.value;
+          var c = ehi.value;
+          console.log(e+":"+c);
+          //4.永久保存
+          localStorage.setItem(e,c);
+          //5.清空原有用户输入
+          eng.value = "";
+          ehi.value = "";
+        }
+        
+    </script>
+</body>
+</html>

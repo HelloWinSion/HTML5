@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .blue{ background-color:#ddf;color: #33a;  }
+        .pink{ background-color:#fdf;color: #a3a; }
+        .dark{ background-color:#333;color: #eee; }
+    </style>
+</head>
+<body>
+    <h1>用户中心</h1>
+   <script>
+        //1.获取用户选中的主题
+          var v = localStorage.getItem("list");
+        //2.立即应用到body.className中
+        if(v){
+           document.body.className = v;
+        }
+        //3.为windows对象绑定事件onstorage
+        window.onstorage = function(){
+            console.log(111);
+          //4.如果当此事件触发，修改list
+          //5.再次读取list值应用到当前网页
+          var v = localStorage.getItem("list")
+          document.body.className = v;
+      }
+   </script>
+</body>
+</html>

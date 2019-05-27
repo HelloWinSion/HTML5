@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        用户名：<input type="text" id="uname"></br>
+        密码：<input type="password" id="upwd"></br>
+        <input type="button" value="登录" id="btn">
+    </form>
+    <select name= id="">
+        <option value="">蔚蓝天空</option>
+        <option value="">蔚蓝天空</option>
+        <option value="">蔚蓝天空</option>
+    </select>
+    <script>
+         //1.获取元素 uname btn
+         var uname = document.getElementById("uname");
+         var btn = document.getElementById("btn")
+         //2.为btn绑定单机事件
+         btn.onclick = function(){
+             //2.1 获取用户名
+             var n = uname.value;
+             //2.2 保存sessionStroage中
+             sessionStorage.setItem("loginName",n);
+             //2.3 3s后跳转首页
+             alert("3秒后跳转首页");
+             var t =  setInterval(function(){
+                 location.href = "03_index.html";
+             },3000)
+         }
+          
+           
+           
+    </script>
+</body>
+</html>

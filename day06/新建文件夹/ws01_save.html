@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>添加单词页面</title>
+ </head>
+ <body>
+     <p>录入新单词</p>
+     <p>
+            英文<input type="text" id="el"/>
+     </p>
+     <p>
+            中文<input type="text" id="cn"/>
+     </p>
+     <p><input type="button" value="添加" id="add"></p>
+     <p><input type="button" value="测试" id="test"></p>
+     
+    <script type="text/javascript">
+        var el = document.getElementById("el");
+        var cn = document.getElementById("cn");
+        var addBtn = document.getElementById("add");
+        var testBtn = document.getElementById("test");
+        
+        //添加单词事件
+        addBtn.onclick = function(){
+            var elVal = el.value;
+            var cnVal = cn.value;
+            if(!elVal){
+                alert("英文单词不能空!");return;
+            }
+            if(!cnVal){
+                alert("英文单词对应的中文不能为空!");return;
+            }
+            console.log(elVal,cnVal);
+            //数组方式
+            var listStr = localStorage.getItem("list");
+            var listObj={};
+            if(listStr){
+                listObj = JSON.parse(listStr);
+            }
+            listObj[elVal] = cnVal;
+           
+            var listStr = JSON.stringify(listObj);
+            localStorage.setItem('list',listStr);
+            //本地永久保存数据
+           // localStorage.setItem(elVal,cnVal);
+            //清空input输入框
+            el.value = "";
+            cn.value = "";
+        }
+
+        //去测试界面
+        testBtn.onclick = function(){
+            location.href = "./ws01_test.html";
+        }
+	  
+	</script>
+   </p>
+ </body>
+</html>

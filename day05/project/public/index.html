@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="jquery-1.11.3.js" ></script>
+  <script src="echarts.min.js" ></script>
+</head>
+<body>
+     <div id="main"  style="width:800px; height:600px;" ></div>
+     <script>
+       //1.获取容器
+       var main = document.getElementById("main");
+       //2.创建myechat对象
+       var mychat = echarts.init(main);
+       //3.发送ajax请求
+       //4.获取服务器端返回数据
+       $.ajax({
+         url:'http://127.0.0.1:3000/sal',
+         success:(res)=>{
+           //转换数据格式[{name:"北京",value:"110"}]
+           var names = [];
+           /**/var values = []; 
+           for(var item of res.data){
+             console.log(item);
+               names.push(item.name);
+               values.push(item.value);
+           }
+           console.log(names);
+           console.log(values);
+           //5.创建option对象将返回数据添加option
+           var option = {
+            title:{text:"柱状图"},
+            toolbox:{
+              show:true,
+              feature:{
+                dataView:{show:true},  //数据视图
+              restore:{show:true},   //恢复
+              dataZoom:{show:true},   //区域缩放
+              saveAsImage:{show:true} //下载图片
+              }
+            },
+            xAxis:{data:names},
+            yAxis:{},
+            series:[
+              {
+                type:"bar",
+                data:values,
+                itemStyle:{
+                  normal:{
+                    color:function(params){
+                      
+                        //1.创建一个颜色的数组
+                        var colorList = [ '#c1232b','#b5c334','#e87c25' ];
+                        
+                        //2.依据参数的下标返回数组颜色的字符串
+                       return colorList[params.dataIndex]
+                    }
+                  }
+                }
+               }
+             ]
+           }
+           //6.将option添加myechat
+           mychat.setOption(option);
+         }
+       })
+       
+     </script>
+</body>
+</html>

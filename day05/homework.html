@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style type="text/css">
+    body{ text-align:center; }
+	svg{ background:#ddd } 
+  </style>
+ </head>
+ <body>
+   <svg id="s3" width="600" height="400"  ></svg>
+   <script type="text/javascript">
+     var s3 = document.getElementById("s3");
+	 var rows = [ 
+	   {id:1,name:"bj",val:100},
+       {id:2,name:"tj",val:110},
+	   {id:3,name:"sh",val:130},
+	   {id:5,name:"sh",val:60},
+	   {id:6,name:"sh",val:30}
+	 ];
+	 //创建循环数组数据
+	 for (i=0;i<rows.length ;i++ ){
+	 //创建四个变量 x y w h 当前矩形数值
+	 var w = 50;
+	 var h = rows[i].val;
+	 var y = 400 - h;
+	 var x = i*100+50
+	 console.log("宽"+w,"高"+h,x,y);
+	 //创建矩形对象
+	 var rect = document.createElementNS("http://www.w3.org/2000/svg","rect");
+	 //添加四个属性 x y w h 
+	 //将矩形对象添加至画布最后一个子元素
+     rect.setAttribute("x",x);
+	 rect.setAttribute("y",y);
+	 rect.setAttribute("width",w);
+	 rect.setAttribute("height",h)
+	 s3.appendChild(rect);
+	 }
+	 
+   </script>
+ </body>
+</html>

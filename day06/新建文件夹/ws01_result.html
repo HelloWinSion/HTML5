@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>结果页面</title>
+ </head>
+ <body>
+    <h1>测试结果</h1>
+    <p>单词:<span id="all"></span></p>
+    <p>完成了:<span id="finish"></span></p>
+    <p>未完成的:<span id="notF"></span></p>
+    <p>正确:<span id="right"></span></p>
+    <p>错误了:<span id="wrong"></span></p>
+    <input type="button" value="重新测试" id="rtest">
+   
+    <script type="text/javascript">
+        //答案列表
+        var subAnswer = localStorage.getItem("subAnswer");
+        if(!subAnswer){
+          alert("答案信息有误，请重新测试");
+          location.href = "./ws01_test.html";
+        }
+        var subAnswerObj = JSON.parse(subAnswer);
+        console.log(subAnswerObj);
+
+        //单词列表
+        var substr = localStorage.getItem("list");
+        var subObj = JSON.parse(substr);
+        console.log(subObj);
+
+        //总数
+        var allNum = Object.keys(subObj).length;
+        //完成了
+        var finishNum = Object.keys(subAnswerObj).length;
+        //未完成的
+        var notFNum = allNum - Object.keys(subAnswerObj).length;
+
+        console.log(allNum);
+        console.log(finishNum);
+        console.log(notFNum);
+        //console.log(Object.keys(subAnswerObj));
+
+        //正确的数量
+        var rightNum = 0;
+        var wrongNum = 0;
+        for(let i in subAnswerObj){
+          //正确的单词(rKey)和中文(rValue)
+          var rKey = Object.keys(subObj)[i];
+          var rValue = subObj[rKey];
+
+          //提交的答案
+          var subVal = subAnswerObj[i];
+          if(subVal == rValue){
+            rightNum++;
+          }else{
+            wrongNum++;
+          }
+          //console.log(i);
+          //console.log(subAnswerObj[i]);
+          //console.log(rValue);
+        }
+        console.log(rightNum);
+        console.log(wrongNum);
+
+        //获取要操作的dom元素
+        var allElem = document.getElementById("all");
+        var finishElem = document.getElementById("finish");
+        var notFElem = document.getElementById("notF");
+        var rightElem = document.getElementById("right");
+        var wrongElem = document.getElementById("wrong");
+
+        allElem.innerHTML = allNum;
+        finishElem.innerHTML = finishNum;
+        notFElem.innerHTML = notFNum;
+        rightElem.innerHTML = rightNum;
+        wrongElem.innerHTML = wrongNum;
+
+        //重新测试点击事件
+        var rtestElem = document.getElementById('rtest');
+        rtestElem.onclick = function(){
+            // 清除答案 跳转到测试页面
+            localStorage.removeItem("subAnswer");
+            location.href = ".ws01_test.html";
+        }
+  	</script>
+ </body>
+</html>

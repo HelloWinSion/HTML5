@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="welcome">
+       <a href="04_login.html">请登录</a>
+    </div>
+    <script>
+        //1.获取用户名
+        var n = sessionStorage.getItem("loginName");
+        //2.如果用户名存在修改 welcome值为欢迎回来
+        if(n){
+            var html = "欢迎回来："+n;
+            html+="<a href='05_logout.html' >退出</a>";
+            var welcome = document.querySelector(".welcome");
+            welcome.innerHTML = html;
+        }
+          //<a href="05_logout.html">退出</a>
+    </script>
+</body>
+</html>

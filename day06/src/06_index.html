@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .blue{ background-color:#ddf;color: #33a;  }
+        .pink{ background-color:#fdf;color: #a3a; }
+        .dark{ background-color:#333;color: #eee; }
+    </style>
+</head>
+<body>
+    请选中你喜欢的主题 <br>
+    <select name="" id="list">
+        <option value="">--请选择--</option>
+        <option value="blue">蔚蓝天空</option>
+        <option value="pink">芭比公主</option>
+        <option value="dark">暗黑主题</option>
+    </select>
+    <a href="07_user.html">用户中心</a>
+    <script>
+        //获取下拉菜单
+         var list = document.getElementById("list");
+        //为下拉菜单绑定onchange
+         list.onchange = function(){
+        //获取value
+         var c = this.value;
+         console.log(c);
+        //将value赋值给document.body.className
+         document.body.className = c;
+         //5.将主题永久保存
+         localStorage.setItem("list",c);
+        }
+        //如果用户选择某项内容，永久保存
+        //当用户再次打开网页读取内容并且立即应用
+        //body.className中
+        var c = localStorage.getItem("list");
+        if(c){
+            document.body.className = c;
+         }
+    </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style type="text/css">
+    body{ text-align:center; }
+	div{
+	  float:left;
+	}	
+  </style>
+  <script src="echarts.min.js"></script>
+ </head>
+ <body>
+   <div id="main" style="width:800px;height:400px;" > </div>
+   <div id="main1" style="width:800px;height:400px;" > </div>
+   <div id="main2" style="width:800px;height:400px;" > </div>
+   <div id="main3" style="width:800px;height:400px;" > </div>
+   <script type="text/javascript">
+     //bar柱状图
+     //1.获取容器
+     var main = document.getElementById("main");
+	 //2.创建eachart对象
+	 var mychart = echarts.init(main);
+	 //3.创建option配置对象
+	 var option = {
+	    title:{text:"柱状图"},
+		toolbox:{
+		  show:true,
+		  feature:{
+		    dataView:{show:true},  //数据视图
+			restore:{show:true},   //恢复
+			dataZoom:{show:true},   //区域缩放
+			saveAsImage:{show:true} //下载图片
+		  }
+		},
+        xAxis:{data:["奔驰","宝马","沃尔沃","吉利","奥迪","保时捷","玛莎拉蒂","法拉利"]},
+		yAxis:{},
+		series:[{type:"bar",data:[100,200,20,50,60,80,126,75]}]
+	 };
+	 //将配置对象添加echart
+	 mychart.setOption(option);
+
+    //line折线图
+	//1.获取容器
+     var main1 = document.getElementById("main1");
+	 //2.创建eachart对象
+	 var mychart = echarts.init(main1);
+	 //3.创建option配置对象
+	 var option = {
+			title:{
+			text:"折线图",
+			show:true,
+			left:"center",
+			textStyle:{fontSize:30},
+			subtext:"本次车展汽车品牌"
+		},
+		toolbox:{
+		  show:true,
+		  feature:{
+		    dataView:{show:true},  //数据视图
+			restore:{show:true},   //恢复
+			dataZoom:{show:true},   //区域缩放
+			saveAsImage:{show:true} //下载图片
+		  }
+		},
+        xAxis:{data:["奔驰","宝马","沃尔沃","吉利","奥迪","保时捷","玛莎拉蒂","法拉利"]},
+		yAxis:{},
+		series:[{type:"line",data:[100,200,20,50,60,80,126,75]}]
+	 };
+	 //将配置对象添加echart
+	 mychart.setOption(option);
+
+	 //line折线图
+	//1.获取容器
+     var main2 = document.getElementById("main2");
+	 //2.创建eachart对象
+	 var mychart = echarts.init(main2);
+	 //3.创建option配置对象
+	 var option = {
+		title:{text:"关键词搜索来源/饼图"},
+		toolbox:{
+		  show:true,
+		  feature:{
+		    dataView:{show:true},  //数据视图
+			restore:{show:true},   //恢复
+			dataZoom:{show:true},   //区域缩放
+			saveAsImage:{show:true} //下载图片
+		  }
+		},
+		series:[{
+		   type:"pie",        //类型: 饼状图
+		   radius:"50%",      //半径  50%画布
+		   center:["50%","50%"], //圆心：水平垂直居中
+		   data:[{value:40,name:"360"},{value:20,name:"谷歌"},{value:20,name:"百度"},{value:20,name:"火狐"}]
+     }]
+	};
+	 //将配置对象添加echart
+	 mychart.setOption(option);
+
+	 var main3 = document.getElementById("main3");
+	 var mychart = echarts.init(main3);
+	 var option = {
+		 title:{text:"哈哈哈"},
+		 toolbox:{
+		  show:true,
+		  feature:{
+		    dataView:{show:true},  //数据视图
+			restore:{show:true},   //恢复
+			dataZoom:{show:true},   //区域缩放
+			saveAsImage:{show:true} //下载图片
+		  }
+		},
+	    series:[{
+      type:"gauge",
+      detail:{formatter:'{value}%'},
+      data:[{value:80,name:"迈速表"}]
+     }]
+	 };
+	 mychart.setOption(option);
+   </script>
+ </body>
+</html>

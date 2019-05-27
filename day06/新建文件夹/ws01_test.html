@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>测试页面</title>
+ </head>
+ <body>
+    <h1>小伙子，接受挑战吧！</h1>
+    <div class="list">
+    </div>
+    <input type="button" value="提交答案" id="sub">
+   
+    <script type="text/javascript">
+        var substr = localStorage.getItem("list");
+        var subObj = JSON.parse(substr);
+        console.log(subObj);
+
+        var html = "";
+        for(let i in subObj){
+           console.log(i);
+           console.log(subObj[i]);
+            html += `<div>
+                    ${i}:<input type="text" class="opt">
+                </div>`;
+        }
+       
+        //追加到页面
+        var listElem = document.querySelector(".list");
+        listElem.innerHTML = html;
+
+        //提交答案
+        sub.onclick = function(){
+            var opts = document.querySelectorAll(".opt");
+            var valNum = 0;
+            var subAnswerObj = {};
+            for(var i=0;i<opts.length;i++){
+                var optVal = opts[i].value;
+                if(!optVal){
+                    valNum++
+                }else{
+                    subAnswerObj[i] =optVal;
+                } 
+            }
+            if(valNum == Object.keys(subObj).length ){
+                alert('不能都不会做吧？');return;
+            }
+            var subAnswerStr = JSON.stringify(subAnswerObj);
+            localStorage.setItem("subAnswer",subAnswerStr);
+            location.href = "./ws01_result.html";
+        }
+	</script>
+   </p>
+ </body>
+</html>
