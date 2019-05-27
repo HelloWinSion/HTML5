@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ <style type="text/css">
+    body{ text-align:center; }
+	canvas{ background-color:#ddd }
+  </style>
+ </head>
+ <body>
+   <canvas id="c3" width="500" height="400" > </canvas>   
+   <script type="text/javascript">
+     c3 = document.getElementById("c3");
+	 ctx = c3.getContext("2d");
+	 //获取图片
+	 var p3 = new Image();
+	  p3.src = "res/p3.png"
+	  p3.onload = function(){
+	    //1.创建两个变量保存2架小飞机旋转角度
+		var deg1 = 0;
+        var deg2 = 0;
+		//2.创建定时器
+		var t = setInterval(function(){
+			//清除
+			ctx.clearRect(0,0,500,400);
+			var w = p3.width;
+		    var h = p3.height;
+		  //2.0保存画笔的状态
+		  ctx.save();
+		  //2.1平移圆点 100 100 左上角
+		  ctx.translate(100,100);
+		  //2.2第一架小飞机旋转
+		  ctx.rotate(deg1*Math.PI/180);
+		  //2.3绘制第一架小飞机
+		  ctx.drawImage(p3,-w/2,-h/2)
+		  //2.4恢复画笔状态
+		  ctx.restore();
+		  //2.5累计第一架小飞机的角度
+		  deg1+=15;
+		  //2.5.1保存画笔状态
+		  ctx.save();
+		  //2.6平移圆点 400,100右上角
+		  ctx.translate(400,100);
+		  //2.7第二架小飞机旋转
+		  ctx.rotate(deg2*Math.PI/180);
+		  //2.8绘制第二架小飞机
+		  ctx.drawImage(p3,-w/2,-h/2);
+		  //2.9恢复画笔状态
+		  ctx.restore();
+		  //2.10累加第二架小飞机角度
+		  deg2+=30;
+		},100)
+	  }
+	</script>
+ </body>
+</html>

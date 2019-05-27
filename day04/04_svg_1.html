@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style type="text/css">
+    body{ text-align:center; }
+	svg{ background-color:#ddd }
+	#s5{ fill:#f00;
+	   }
+  </style>
+ </head>
+ <body>
+  <svg id="s3" width="500" height="400" >
+    <!-- <circle cx="250" cy="200" r="100"  fill="#f00" fill-opactiy="0.5"></circle> -->
+  </svg>
+  <script type="text/javascript">
+    //1.获取画布
+	var s3 = document.getElementById("s3");
+	//数字随机函数
+	  function rn(min,max){
+	    var n = Math.random()*(max-min)+min;
+		return Math.floor(n);
+	  };
+	  console.log(rn(0,150));
+	  //颜色随机函数
+	  function rc(min,max){
+	    var r = rn(min,max);
+	    var g = rn(min,max);
+		var b = rn(min,max);
+		return `rgb(${r},${g},${b})`
+	  };
+	  console.log(rc(0,150));
+	 //1.创建循环30个圆
+	 for(var i=0; i<80;i++){
+	   //2.创建圆形
+	   var c = document.createElementNS("http://www.w3.org/2000/svg","circle")
+     //3.指定原型对象 半径 圆心 透明度
+	   c.setAttribute("r",rn(10,40));
+	   c.setAttribute("cx",rn(0,500));
+	   c.setAttribute("cy",rn(0,400));
+	   c.setAttribute("fill",rc(0,255));
+	   c.setAttribute("fill-opacity",Math.random());
+	   //4.将圆形添加至画布  
+	   s3.appendChild(c);
+	  //点击圆形
+	 //5.为当前圆绑定单机事件
+	 c.onclick = function(){
+		 var t = setInterval(()=>{
+			 //6.修改当前圆形变大 r
+		   var r = this.getAttribute("r");
+		   r*=1.05;
+		   this.setAttribute("r",r)
+		    //7.修改当前圆形变淡 fill-opacity
+           var p = this.getAttribute("fill-opacity");
+		   p*=0.5;
+		   this.setAttribute("fill-opacity",p);
+		   if(p<0.05){
+		     s3.removeChild(this);
+			 clearInterval(t);
+		   }
+		 },100)
+	  }
+    }
+	//自动刷新函数
+	 function reurl(){
+	   url = location.href;
+	   var times = url.split("?t=");
+	   if(times[1] != 1){
+	     url += "?t=1";
+		 self.location.replace(url);
+	   }else{
+	      url += "?t=1";
+		  self.location.replace(url);
+	   }
+	 }
+	  window.onload = function(){
+     setTimeout("reurl()",100);
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//颜色随机
+	/*function color(){
+	  var a = parseInt(Math.random()*255);
+	  var b = parseInt(Math.random()*255);
+	  var c = parseInt(Math.random()*255);
+	  return `rgb(${a},${b},${c})`
+	}*/
+   </script>
+ </body>
+</html>

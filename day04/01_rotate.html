@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style type="text/css">
+    body{ text-align:center; }
+	canvas{ background-color:#ddd }
+  </style>
+ </head>
+ <body>
+   <canvas id="c3" width="500" height="400" > </canvas>   
+   <script type="text/javascript">
+     c3 = document.getElementById("c3");
+	 ctx = c3.getContext("2d");
+	 //旋转图片
+	 var p3 = new Image();
+	 p3.src = "res/p3.png";
+	 p3.onload = function(){
+	   //在左上角绘制图形
+	   ctx.drawImage(p3,0,0)
+	   //旋转画笔对象
+	   ctx.rotate(15 * Math.PI/180);
+	   //再绘制小飞机
+	   ctx.drawImage(p3,0,0)
+	   //旋转画笔对象
+	   ctx.rotate(15 * Math.PI/180);
+	   ctx.drawImage(p3,0,0);
+	   //修改画布的圆点
+	   ctx.translate(250,200);
+	   ctx.drawImage(p3,0,0);
+	   ctx.rotate(15 * Math.PI/180);
+	   ctx.drawImage(p3,0,0);
+	 }
+   </script>
+ </body>
+</html>

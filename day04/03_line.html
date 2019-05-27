@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style type="text/css">
+    canvas{ background-color:#ddd; }
+  </style>
+ </head>
+ <body>
+   <canvas id="c3" width="500" height="400"></canvas>
+   <script type="text/javascript">
+     var c3 = document.getElementById("c3");
+	 ctx = c3.getContext("2d")
+	 //1.创建渐变对象
+	 var g = ctx.createLinearGradient(0,0,500,0)
+	 //2.添加3个颜色点
+	 g.addColorStop(0,"#f00");
+	 g.addColorStop(0.5,"#ff0");
+	 g.addColorStop(1,"#0ff");
+	 //3.将渐变对象赋值实心样式
+	 ctx.fillStyle = g;
+	 //4.绘制实矩形
+	 ctx.fillRect(0,0,500,200);
+	 //5.绘制实心文本
+	 ctx.fillText("Tarena",240,200);
+   </script>
+ </body>
+</html>
