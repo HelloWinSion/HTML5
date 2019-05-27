@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+  <!--poster="res/mm.png"-->
+  <video id="a1" src="res/x.mp4" controls  loop muted  preload="metadata">
+    
+  </video></br>
+  <div id="a2">
+    <img class="xs yc" src="res/play.png" alt="" />
+  </div>
+  <button id="btn1">播放视频</button>
+  <button id="btn2">暂停播放</button>
+  <script >
+    //1.获取视频元素
+	var  a1 = document.getElementById("a1");
+	//2.修改视频元素音量
+	a1.volume = 0.2;
+	//修改视频回放速率
+	a1.playbackRate = 2;
+	console.log(a1.paused);
+
+     var btn1 = document.getElementById("btn1");
+	 var btn2 = document.getElementById("btn2");
+    btn1.onclick = function(){
+	   a1.play();
+	}
+	 btn2.onclick = function(){
+	  a1.pause();
+	}
+	var a2 = document.getElementById("a2");
+	 a2.onclick = function(){
+	   a1.play();
+	}
+  </script>
+  <style>
+    #a2{
+	 position:absolute;
+	 left:371px;
+	 top:191px;
+	}
+	xs{
+	  display:none;
+	}
+
+	#a1:hover{
+	  
+	}
+  </style>
+ </body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style >
+    body{
+	  background-color:#fff;
+	  text-align:center;
+	}
+	.container{
+	  position:relative;
+	}
+    .ctrl{
+	  position:absolute;
+	  left:50%;
+	  top:50%;
+	  margin-top:-50px;
+	  margin-left:-50px;
+	}
+	.ctrl img{
+	  width:100px;
+	  height:100px;
+	}
+	.ad{
+	  position:absolute;
+	  width:400px;
+	  height:300px;
+	  left:50%;
+	  top:50%;
+	  margin-left:-200px;
+	  margin-top:-150px;
+	}
+  </style>
+ </head>
+ <body>
+    <!--最外层父元素-->
+    <div class="container">
+	  <!--视频元素-->
+	  <video src="res/x.mp4" id="v3" ></video>
+	  <!--广告元素-->
+	  <img  class="ad" src="res/mm.png" />
+	  <!--图片元素按钮-->
+	  <a class="ctrl">
+	    <img src="res/play.png" alt="" />
+	  </a>
+	</div>
+	<script>
+	   //需求:鼠标的移入和离开完成一个按钮图片的显示或者隐藏
+       // 1.获取所有元素
+	   var container = document.querySelector(".container");
+	   var v3 = document.getElementById("v3");
+	   var ctrl = document.querySelector(".ctrl");
+	   var img = document.querySelector(".ctrl img")
+	   var ad = document.querySelector(".ad")
+	   //2.鼠标移入显示按钮图片
+	   container.onmouseenter = function(){
+	      ctrl.style.display = "block"
+	   }
+	   //3.鼠标移出隐藏按钮图片
+	   container.onmouseleave = function(){
+		  ctrl.style.display = "none"
+	   }
+	   //4.为按钮元素绑定单机事件
+       ctrl.onclick = function(e){
+	   //4.1.阻止事件默认行为   只要是a submint button 有跳转行为的都要阻止冒泡
+	   e.preventDefault();
+	   //4.2判断当前视频状态
+	   //4.3当前如果是暂停的就播放/当前如果是播放的就暂停
+	   if(v3.paused){
+	     v3.play();
+		 img.src = "res/pause.png";
+		 ad.style.display = "none";
+	   }else{
+	     v3.pause();
+		 img.src = "res/play.png";
+		 ad.style.display = "block"
+	   }
+	   }
+	</script>
+ </body>
+</html>

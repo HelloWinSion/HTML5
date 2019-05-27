@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style>
+     /* #c3{
+     	   border:1px solid green;
+     	 }*/
+     	 #c4{
+     	   position:absolute;
+		   left:6px;
+		   top:415px;
+     	 } 
+  </style>
+ </head>
+ <body>
+     <canvas id="c3" width="550" height="400">
+	 </canvas>
+	 <canvas id="c4" width="550" height="30">
+	 </canvas>
+	 <script>
+	   var arr = [
+	     {id:1,name:'北京',val:100},
+		 {id:2,name:'上海',val:38},
+		 {id:3,name:'广州',val:21},
+		 {id:4,name:'深圳',val:165},
+		 {id:5,name:'杭州',val:182},
+	   ];
+	   var c3=document.getElementById("c3");
+	   var ctx=c3.getContext("2d");
+	   var c4=document.getElementById('c4');
+	   var ctx1 = c4.getContext("2d");
+	   
+       for(var i=0;i<arr.length;i++){
+		   var item = arr[i];
+		   var val = item.val;
+		   var name = item.name;
+		   var x = i*100+50;
+		   var y = 400-val;
+
+           /*两种方式给柱体设置不同颜色
+		    *一种是随机数，另一种是数组
+			*工作中 要求是具体的颜色
+			*推荐使用颜色数组方式 
+            */
+		   var a = parseInt(Math.random()*255);
+		   var b = parseInt(Math.random()*255);
+		   var c = parseInt(Math.random()*255);
+           var rgb = `rgb(${a},${b},${c})`;
+		   ctx.fillStyle=rgb;
+		   
+		   ctx.fillRect(x,y,50,val);
+		   //输入文字
+		   var txt = item.val;
+		   
+		   ctx.font="19px SimHei";
+	       ctx.textBaseline="top";
+
+		   var txtWidthObj = ctx.measureText(txt);
+		   var txtWidth = txtWidthObj.width;
+		   
+		   ctx.fillText(txt,x+25-txtWidth/2,y-19);
+
+		   ctx1.font="25px SimHei";
+		   var txtWidthObj1 = ctx1.measureText(name);
+		   var txtWidth1 = txtWidthObj1.width;
+		   ctx1.textBaseline="top";
+           ctx1.fillText(name,x+25-txtWidth1/2,0);
+	   }
+	 </script>
+ </body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style>
+    body{ text-align:center; }
+    #c3{
+	  background:#ddd;
+	}
+  </style>
+ </head>
+ <body>
+   <canvas id="c3" width="500" height="400" ></canvas>
+   <script>
+     //1.获取画布
+     var c3 = document.getElementById("c3");
+     //2.依据画获取画笔
+	 var cxt = c3.getContext("2d");
+	 //3.绘制矩形 左上角
+     cxt.fillStyle = "red";
+	 cxt.fillRect(0,0,150,80);
+     cxt.fillRect(0,320,150,80);
+     cxt.fillRect(350,0,150,80);
+	 cxt.fillRect(350,320,150,80);
+	 cxt.fillRect(150,160,180,80);
+
+	 cxt.strokeStyle = "blue";
+	 cxt.strokeRect(150,120,200,160);
+	 //清除左上角
+	 cxt.clearRect(0,0,150,80)
+	 cxt.clearRect(350,0,150,80)
+   </script>
+ </body>
+</html>

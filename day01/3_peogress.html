@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+  <h3>进度条</h3>
+  <progress value="0" id="p3"></progress>
+  <h3>刻度尺</h3>
+  每个月的薪水
+  <meter id="p4" min="0" max="10000" low="3000" high="90000" optimum="99999" value="0" ></meter>
+  
+  <h3>输出语义标签</h3>
+  商品单价：￥3.5</br>
+  商品数量：<input type="number" value="1" /></br>
+  商品小计：<output>￥3.5</output>
+
+<script type="text/javascript">
+   var p3 = document.getElementById("p3");
+   var t = setInterval(function(){
+     var v = p3.value;
+	  v+=0.1;
+	  p3.value = v;
+	  if(v>=1){
+	    clearInterval(t);
+	  }
+	  console.log(v);
+  },1000)
+  var p4 = document.getElementById("p4");
+  var d = setInterval(function(){
+    var s = p4.value;
+	s+=1000;
+	p4.value = s;
+	if(s>=9000){
+		cleraInterval(d);
+	}
+  },1000)
+</script>
+ </body>
+</html>

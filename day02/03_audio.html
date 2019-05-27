@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+   <!--<audio src="res/x.mp4" controls></audio>-->
+   </br>
+   <input type="checkbox"  id="cb" />选中播放背景音乐
+   <audio src="res/bg.mp3" controls id="a3"></audio>
+   <script>
+     var cb = document.getElementById("cb");
+	 var a3 = document.getElementById("a3");
+	 cb.onchange = function(){
+		 if (this.checked){
+             a3.play();
+		 }else{
+		     a3.pause();
+		 }
+	 }
+   </script>
+ </body>
+</html>

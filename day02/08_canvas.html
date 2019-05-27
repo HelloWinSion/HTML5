@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style type="text/css">
+    body{
+	  text-align:center;
+	}
+	#c3{
+	  background-color:#eee;
+	}
+	canvas{
+	display:block;
+	margin:0 auto;
+	}
+  </style>
+ </head>
+ <body>
+    <canvas id="c3" width="500" height="400" ></canvas>
+    <script type="text/javascript">
+    var c3 = document.getElementById("c3");
+	var cxt = c3.getContext("2d");
+	//1.准备数据
+	var rows = [
+	{id:1,name:"北京",value:100},
+	{id:2,name:"上海",value:200},
+	{id:3,name:"广州",value:70},
+	{id:4,name:"深圳",value:80},
+	{id:5,name:"杭州",value:150},
+	];
+	var colos = [ "#dda","#ddb","#ddc","#ddd","#dde" ];
+	//2.绘制矩形
+	  //2.1创建一个循环
+	  for (var i=0;i<rows.length ;i++ )
+	  {
+		  //2.2计算当前柱子 W H Y X
+		  var w = 50;
+		  var h = rows[i].value;
+		  var y = 400 - h-30;
+		  var x = i*100+50;
+		  //console.log(x+":"+y+":"+w+":"+h);
+		  cxt.fillStyle = colos[i];
+		  //2.3绘制柱子
+		  cxt.fillRect(x,y,w,h);
+
+           var txt = rows[i].value;
+		   console.log(txt);
+		   cxt.fillStyle = "red";
+		   cxt.font="19px SimHei";
+	       cxt.textBaseline="top";
+
+		   var txtWidthObj = cxt.measureText(txt);
+		   var txtWidth = txtWidthObj.width;
+		   
+		   cxt.fillText(txt,x+25-txtWidth/2,y-19);
+
+		//3.绘制文本
+		  //3.1获取当前分公司名称
+		   var name = rows[i].name;
+		   cxt.fillStyle = "#000";
+		   cxt.font="25px SimHei";
+		   var txtWidthObj1 = cxt.measureText(name);
+		   var txtWidth1 = txtWidthObj1.width;
+		   var y = 372;
+		   cxt.textBaseline="top";
+           cxt.fillText(name,x+25-txtWidth1/2,y);
+	  }	
+	  
+  </script>
+ </body>
+</html>

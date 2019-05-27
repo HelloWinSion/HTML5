@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <script src="jquery-1.11.3.js"></script>
+ </head>
+ <body>
+  <div class="b1">
+	<video  class="a1" src="res/x.mp4" controls>
+	  
+	</video>
+	<div class="a2">
+	  <img  src="res/play.png"  />
+   </div>
+  </div>
+   
+
+  <style>
+  .a1{
+    margin-left:500px;
+   }
+     .a2{
+	 position:absolute;
+	 left:905px;
+	 top:200px;
+	}
+	
+  </style>
+  <script type="text/javascript">
+    var $li=$(".lunbo>li");
+		var $lih=$li.length;
+		var $uli=$(".btn>li")
+		var i=0;
+		function moves(){
+		 timer = setInterval(function(){
+			i++;
+			if(i>=$lih){
+				i=0;
+			}
+			$li.eq(i).animate({opacity:1},1000).siblings().animate({opacity:0},1000)
+			$uli.eq(i).addClass('active').siblings().removeClass('active');
+		},3000)
+	}
+	moves();
+
+	$('div.container').mouseenter(function(){
+		clearInterval(timer);
+
+	}).mouseleave(function(){
+		moves();
+	})
+
+	$("div.next").click(function(){
+		i++;
+			if(i>=$lih){
+				i=0;
+			}
+			$li.eq(i).animate({opacity:1},1000).siblings().animate({opacity:0},1000)
+			$uli.eq(i).addClass('active').siblings().removeClass('active');
+	})
+	
+	$("div.prev").click(function(){
+		i--;
+			if(i<0){
+				i=$lih-1;
+			}
+			$li.eq(i).animate({opacity:1},1000).siblings().animate({opacity:0},1000)
+			$uli.eq(i).addClass('active').siblings().removeClass('active');
+	})
+
+	$('ul.btn').click(function(e){
+		i=$(e.target).index()
+		$li.eq(i).animate({opacity:1},1000).siblings().animate({opacity:0},1000)
+			$uli.eq(i).addClass('active').siblings().removeClass('active');
+	})
+	</script>
+  </script>
+ </body>
+</html>
